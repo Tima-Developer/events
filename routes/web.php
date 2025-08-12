@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +26,3 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
-Route::resource('events', EventController::class);
