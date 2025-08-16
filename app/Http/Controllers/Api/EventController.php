@@ -20,7 +20,7 @@ class EventController extends Controller
     public function list(ListRequest $request): JsonResponse
     {
         $builder = Event::query();
-        $perPage = $request->get('per_page', 10);
+        $perPage = $request->get('limit', 10);
 
         if (isset($request->search)) {
             $builder->where('title', 'like', "%$request->search%");
