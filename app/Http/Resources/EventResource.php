@@ -15,6 +15,12 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if (str_contains($this->image, 'https')) {
+            $image = $this->image;
+        } else {
+            $image = asset(Storage::url($this->image));
+        }
+
         return [
             'id'            => $this->id,
             'title'         => $this->title,
@@ -23,7 +29,7 @@ class EventResource extends JsonResource
             'created_at'    => $this->created_at,
             'address'       => $this->address,
             'contacts'      => $this->contacts,
-            'image'         => asset(Storage::url($this->image)),
+            'image'         => $image,
             'original_link' => $this->original_link,
         ];
     }

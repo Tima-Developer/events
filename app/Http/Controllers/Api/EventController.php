@@ -34,9 +34,13 @@ class EventController extends Controller
             $builder->whereDate('event_date', '<=', $request->date_end);
         }
 
+        $total  = $builder->count();
         $events = $builder->orderBy('created_at', 'desc')->paginate($perPage);
 
-        return response()->json(EventResource::collection($events));
+        return response()->json([
+            'total'  => $total,
+            'events' => EventResource::collection($events)
+        ]);
     }
 
     /**
